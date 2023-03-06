@@ -1,0 +1,547 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     25089,        537]
+NotebookOptionsPosition[     24577,        515]
+NotebookOutlinePosition[     24914,        530]
+CellTagsIndexPosition[     24871,        527]
+WindowFrame->Normal
+ContainsDynamic->False*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["A Card Trick", "Title",
+ CellChangeTimes->{{3.3962606275386972`*^9, 3.3962606307566977`*^9}, {
+  3.435808175894474*^9, 3.4358081762360697`*^9}}],
+
+Cell["\<\
+Text from:
+http://jeremyclark.wordpress.com/2007/08/10/a-card-trick/
+
+An article by John Allen Paulos tipped me off to an interesting card trick. \
+The trick is mathematical, and based on probability theory not sleight of \
+hand. You get rid of the face cards in a deck (leaving the aces, which will \
+be treated as 1\[CloseCurlyQuote]s), and give it a good shuffle. You then \
+tell a cute woman (or man) you are trying to impress to pick a secret number \
+between 1 and 10. Let\[CloseCurlyQuote]s say she picks 7\[LongDash]after all, \
+we all know that prime numbers are more random ;) . You then ask her to count \
+(from 1\[Ellipsis] if she is geeky enough to count from 0, she\
+\[CloseCurlyQuote]s probably not going to find the trick very impressive) the \
+cards as you slowly turn them over. When the cards reach her number, the 7th \
+card, she looks at the number on the card and this her new secret number. She \
+then starts counting cards again from 1 to her new number, and repeats the \
+process. Towards the end of the deck, you pause after overturning a card, tap \
+it, and declare it to be the secret card she was counting towards.
+
+The trick is to do the same thing you\[CloseCurlyQuote]ve ask her to do with \
+the first card and go through the process in your head as you are performing \
+the trick. The probability is in favor of your chain of numbers colliding at \
+some point with hers, after which every number in the sequence will be the \
+same (the chains have been \[OpenCurlyDoubleQuote]coupled\
+\[CloseCurlyDoubleQuote]). As you near the end of the deck, you guess your \
+own secret card with the confidence that it will be the same as hers.
+
+To see it in action, here is a graph showing how such a game might progress. \
+The numbers on the graph are not the series of secret numbers themselves, but \
+rather the position of the secret cards in the deck.
+
+If you run it a few times, you'll see that sometimes, it doesn\
+\[CloseCurlyQuote]t work out perfectly.
+
+So what is the probability that the trick will actually work? Working out the \
+solution is more difficult than it sounds, but it has been found empirically \
+to be about 83.7% for this variation (other variations leave the face cards \
+in, and have them count as 5\[CloseCurlyQuote]s, raising the probability of \
+succeeding a couple points).\
+\>", "Text",
+ CellChangeTimes->{{3.4358082171489773`*^9, 3.4358082856063957`*^9}, {
+  3.435808441539111*^9, 3.4358084480507603`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "Parameters", " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"n", "=", "10"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"m", "=", "4"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "Packages", " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<Combinatorica`\>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "Code", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deck", "=", 
+     RowBox[{
+      RowBox[{"Flatten", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"1", ",", "n"}], "]"}], ",", 
+         RowBox[{"{", "m", "}"}]}], "]"}], "]"}], "//", 
+      "RandomPermutation"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<\\n\\nShuffled Deck: \>\"", ",", "%"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f", "[", "x_", "]"}], ":=", 
+    RowBox[{"NestWhileList", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"deck", "[", 
+         RowBox[{"[", "#", "]"}], "]"}], "+", "#"}], "&"}], ",", "x", ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"deck", "[", 
+          RowBox[{"[", "#", "]"}], "]"}], "+", "#"}], "\[LessEqual]", 
+        RowBox[{"Length", "[", "deck", "]"}]}], "&"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Rule", "@@", "#"}], "&"}], "/@", 
+     RowBox[{"Transpose", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Most", "[", "x", "]"}], ",", 
+        RowBox[{"Rest", "[", "x", "]"}]}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"h", "[", "x_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"g", "/@", 
+       RowBox[{"f", "/@", 
+        RowBox[{"Range", "[", "x", "]"}]}]}], "//", "Flatten"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"h", "[", "n", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"LayeredGraphPlot", "[", 
+    RowBox[{"%", ",", 
+     RowBox[{"DirectedEdges", "\[Rule]", "True"}], ",", 
+     RowBox[{"VertexLabeling", "\[Rule]", "True"}], ",", 
+     RowBox[{"MultiedgeStyle", "\[Rule]", "0.3"}], ",", 
+     RowBox[{"PackingMethod", "\[Rule]", "\"\<LayeredTop\>\""}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ent", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"-", "x"}], "*", 
+     RowBox[{"Log", "[", 
+      RowBox[{"2", ",", "x"}], "]"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Last", "/@", 
+     RowBox[{"f", "/@", 
+      RowBox[{"Range", "[", "n", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DeleteCases", "[", 
+     RowBox[{
+      RowBox[{"BinCounts", "[", 
+       RowBox[{"%", ",", "1"}], "]"}], ",", "0"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"N", "[", 
+     RowBox[{"Total", "[", 
+      RowBox[{"ent", "/@", 
+       RowBox[{"(", 
+        RowBox[{"%", "/", "10"}], ")"}]}], "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Entropy of the outcome: \>\"", ",", " ", "%"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.3950736752609997`*^9, {3.395074701356*^9, 3.395074718615*^9}, {
+   3.395075021344*^9, 3.395075022176*^9}, {3.395172797385992*^9, 
+   3.395172822720992*^9}, {3.3951728940469923`*^9, 3.3951728946719923`*^9}, {
+   3.3951739725599923`*^9, 3.3951739742119923`*^9}, {3.395174006274992*^9, 
+   3.3951740096199923`*^9}, {3.395174122234992*^9, 3.3951741445379925`*^9}, {
+   3.395174193170992*^9, 3.395174371052992*^9}, {3.395174427873992*^9, 
+   3.3951744337169924`*^9}, {3.395174525265992*^9, 3.3951745961989923`*^9}, {
+   3.3951746581909924`*^9, 3.395174692215992*^9}, {3.395706718381*^9, 
+   3.395706776408*^9}, {3.395706907396*^9, 3.3957069245150003`*^9}, {
+   3.395706962288*^9, 3.3957069627869997`*^9}, {3.3962601443416977`*^9, 
+   3.396260160957698*^9}, {3.3962602168346977`*^9, 3.396260267761698*^9}, {
+   3.3962603027586975`*^9, 3.3962603215546975`*^9}, {3.4358078792554626`*^9, 
+   3.435807921660551*^9}, {3.4358079520357437`*^9, 3.435807954609952*^9}, {
+   3.4358079939453983`*^9, 3.4358080606703577`*^9}, {3.435808361158803*^9, 
+   3.435808419673596*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\n\\nShuffled Deck: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "6", ",", "3", ",", "8", ",", "3", ",", "6", ",", "1", ",", "9",
+      ",", "4", ",", "2", ",", "2", ",", "8", ",", "2", ",", "5", ",", "2", 
+     ",", "1", ",", "5", ",", "4", ",", "7", ",", "6", ",", "7", ",", "6", 
+     ",", "1", ",", "3", ",", "7", ",", "9", ",", "4", ",", "10", ",", "3", 
+     ",", "5", ",", "5", ",", "8", ",", "9", ",", "10", ",", "10", ",", "8", 
+     ",", "4", ",", "7", ",", "10", ",", "9"}], "}"}]}],
+  SequenceForm[
+  "\n\nShuffled Deck: ", {1, 6, 3, 8, 3, 6, 1, 9, 4, 2, 2, 8, 2, 5, 2, 1, 5, 
+   4, 7, 6, 7, 6, 1, 3, 7, 9, 4, 10, 3, 5, 5, 8, 9, 10, 10, 8, 4, 7, 10, 9}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.4358080101523943`*^9, 3.435808019833275*^9}, {
+  3.435808061629393*^9, 3.435808087143067*^9}, {3.435808369209388*^9, 
+  3.435808419988984*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  TagBox[GraphicsComplexBox[CompressedData["
+1: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
+4n8H8b+D+F8h/leI/xXif4X4XyH+V6DF4gELut8M5PMvN2ibU+uXK5cD+fzL
+DQTzvl7nzgTy+ZcWUkZXGvtAIJ9/aWHG8dkdpu0I5PMvLdzy+y0zOiOQz7/c
+4avrLdL6zgrk8y93ODAtO3zimEA+/3KHWjeE7HP5/nz+5QE93478sO9Ofz7/
+8oQ+i/1HJC/x5/MvT9gdv89z6QR/Pv/yhI0tTyVdjfTn8y9PqFgx+Y+tQf58
+/uUJd4YsutD5rZPPvzwh+Oc9Dr+LTj7/8oQZsUVr/mwQyOffGjh68vXto26B
+fP6tgZxUv+NRxQF8/q0Bj7JDbUN+CuDzbw282nNmd/LSAD7/1kC/9OiBS+MC
++PxbAwMb1E3Z3yOAz7818HXHBCE0JIDPO92gbFvJlHUZTj7/1kGdiJ5B+2c4
++fxbBycsGwI2jXHy+bcOgofppqT1dPL5tx6C/r0w54DLyeffesiQCsaGNnXy
++bceJk4ZU/5hPSeTq+aAHjApvUkTCHDy+bcH7FrvUfTPIU7WeMHXp4+XG+Cb
+lIun/cY72U1TRvfJQUaY20uqkzfNyWqXll670tcI1jMjw+W5Ttav+ZucRV8b
+IT0rYLN+sZNN9B7lFpBnhKwes95+vtzJskui3OUXRnj0uGtU33Qn080aeFXX
+2Ase87zV/2/5a13dDz7q/onhbmv1hT7q847ffT71mdGknqfb+zLxETOByOtR
+lgz9T9IUk1pv9+K4VU2yTZDK86T+eDh4RbFJzRve+tcd7b3MkNYyrk6Uw8nC
+5iyOLSs0wElL5/3lNZ2sS0v9yC01jHBlZsfwr97fX/SUYzXyOxjBUTz1ndTo
+/f01nP9llxlGKKid8MXmxk42Z1VqnmWvEUYX5n/X9P39NwiP3OT3zAhXR/TZ
+treZk83fqtG3CPaCeVXv38nW8vy4xvy4/75jUMK5Ih8YxZ/XeZbvxZc+JvW8
+x/VOHXwRYVLruZ9xtiJ3lkmt19hteVzYAZOap/6ivo5Rz02wguf9kOV7Kx+Y
+QSyTVmb/pqj5b/qFaRzXFTX/2c3tEuZdVtT8qV3MB16eU9T8xe6+bcb9qqj5
+O/Y54HvtjKLmP3M0xNT/tKLmr13Fu6LmxzXmx/2YP4I/D/PjeZgf68H8WC/m
+xzyY38rzYv6K2bPuXdugqP1vX5vz6M0yRe3/uufiVvZIUdT+XzGgbsLLREXt
+f7/540SvzxS1/00XPA5mxihq/+e2DO27f6yi9v/BKv8pav/jGvPjfux/fB72
+P56H/Z/G68H+x3qx/x08D/Y/5sX+Rx5w/oX84/wLecL5F/KP8y/kEedfyCvO
+v5BnnH8h7zj/wjXOv3A/zr/weTj/wvNw/oX84/wL68X5F/KP8y/Mi/Mv5L9m
+++M/J4wTVF42Z2p3Fc0VVJ6ah97Wj1kvqLx1tH50uG6eoPJ4pNuJ68argsr/
+8nUbexkrBJXnY32+0Co2X5V3nP/iGvPj/sk+20Mf/O//H/x5m2Hew0oPi3re
+VEvU0Mo6FrWe8q73k64zi1qvvn7nVms+sah5VhxruKhpokXlX6k5JmVRmkXl
+H/MjL5gfecL8yBvmRx4xP/KP+ZFnzI+8Y35cY37cj/mRf8yP52F+rAfzY72Y
+H/NgfuQf8yMP2P/IP/Y/8oT9j/xj/yOP2P/IK/Y/8oz9j7xj/+Ma8+N+7H98
+HvY/nof9j/xj/2O92P/IP/Y/5sX+/zv/IuFfJPyLhH+R8C8S/kXCv5XwbyX8
+2wj/NsK/RPiXCP8S4V8i/EuEf4nwLxL+RcK/SPgXCf8i4V8k/FsJ/1bCv43w
+byP8S4R/ifAvEf4lwr9E+JcI/yLhXyT8i4R/kfAvEv5Fwr+V8G8l/NsI/zbC
+v0T4lwj/EuFfIvxLhH+J8C8S/kXCv0j4Fwn/IuFfJPxbCf9Wwr+N8G8j/EuE
+f4nwLxH+JcK/RPiX4L/Fj0Ou
+    "], {
+     {RGBColor[0.5, 0., 0.], Arrowheads[{{0.019671567747480998`, 0.7}}], 
+      ArrowBox[{1, 2}], 
+      ArrowBox[{2, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+        36, 3}], 
+      ArrowBox[{2, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+        52, 3}], 
+      ArrowBox[{3, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+        68, 4}], 
+      ArrowBox[{3, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83,
+        84, 4}], ArrowBox[{3, 4}], 
+      ArrowBox[{3, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+        100, 4}], 
+      ArrowBox[{3, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112,
+        113, 114, 115, 116, 4}], 
+      ArrowBox[{4, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128,
+        129, 130, 131, 132, 5}], 
+      ArrowBox[{4, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144,
+        145, 146, 147, 148, 5}], 
+      ArrowBox[{4, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160,
+        161, 162, 163, 164, 5}], 
+      ArrowBox[{4, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176,
+        177, 178, 179, 180, 5}], 
+      ArrowBox[{4, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192,
+        193, 194, 195, 196, 5}], 
+      ArrowBox[{4, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208,
+        209, 210, 211, 212, 5}], 
+      ArrowBox[{5, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224,
+        225, 226, 227, 228, 6}], 
+      ArrowBox[{5, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240,
+        241, 242, 243, 244, 6}], 
+      ArrowBox[{5, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256,
+        257, 258, 259, 260, 6}], 
+      ArrowBox[{5, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272,
+        273, 274, 275, 276, 6}], 
+      ArrowBox[{5, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288,
+        289, 290, 291, 292, 6}], 
+      ArrowBox[{5, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304,
+        305, 306, 307, 308, 6}], 
+      ArrowBox[{6, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320,
+        321, 322, 323, 324, 7}], 
+      ArrowBox[{6, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336,
+        337, 338, 339, 340, 7}], 
+      ArrowBox[{6, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352,
+        353, 354, 355, 356, 7}], 
+      ArrowBox[{6, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368,
+        369, 370, 371, 372, 7}], 
+      ArrowBox[{6, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384,
+        385, 386, 387, 388, 7}], 
+      ArrowBox[{6, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400,
+        401, 402, 403, 404, 7}], ArrowBox[{8, 9}], 
+      ArrowBox[{9, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416,
+        417, 418, 419, 420, 10}], 
+      ArrowBox[{9, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432,
+        433, 434, 435, 436, 10}], 
+      ArrowBox[{10, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 
+       448, 449, 450, 451, 452, 11}], 
+      ArrowBox[{10, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 
+       464, 465, 466, 467, 468, 11}], 
+      ArrowBox[{10, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 
+       480, 481, 482, 483, 484, 11}], 
+      ArrowBox[{10, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 
+       496, 497, 498, 499, 500, 11}], 
+      ArrowBox[{11, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 
+       512, 513, 514, 515, 516, 12}], 
+      ArrowBox[{11, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 
+       528, 529, 530, 531, 532, 12}], 
+      ArrowBox[{11, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 
+       544, 545, 546, 547, 548, 12}], 
+      ArrowBox[{11, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 
+       560, 561, 562, 563, 564, 12}], 
+      ArrowBox[{12, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 
+       576, 577, 578, 579, 580, 13}], 
+      ArrowBox[{12, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 
+       592, 593, 594, 595, 596, 13}], 
+      ArrowBox[{12, 597, 598, 599, 600, 601, 602, 603, 604, 605, 606, 607, 
+       608, 609, 610, 611, 612, 13}], 
+      ArrowBox[{12, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 
+       624, 625, 626, 627, 628, 13}], ArrowBox[{14, 10}], ArrowBox[{15, 3}], 
+      ArrowBox[{16, 3}], ArrowBox[{17, 18}], ArrowBox[{18, 19}], 
+      ArrowBox[{19, 4}], ArrowBox[{20, 10}]}, {InsetBox[
+       FrameBox["1",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 1], InsetBox[
+       FrameBox["2",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 2], InsetBox[
+       FrameBox["8",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 3], InsetBox[
+       FrameBox["17",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 4], InsetBox[
+       FrameBox["22",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 5], InsetBox[
+       FrameBox["28",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 6], InsetBox[
+       FrameBox["38",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 7], InsetBox[
+       FrameBox["3",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 8], InsetBox[
+       FrameBox["6",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 9], InsetBox[
+       FrameBox["12",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 10], InsetBox[
+       FrameBox["20",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 11], InsetBox[
+       FrameBox["26",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 12], InsetBox[
+       FrameBox["35",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 13], InsetBox[
+       FrameBox["4",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 14], InsetBox[
+       FrameBox["5",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 15], InsetBox[
+       FrameBox["7",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 16], InsetBox[
+       FrameBox["9",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 17], InsetBox[
+       FrameBox["13",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 18], InsetBox[
+       FrameBox["15",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 19], InsetBox[
+       FrameBox["10",
+        Background->RGBColor[1, 1, 0.8],
+        FrameStyle->RGBColor[0.94, 0.85, 0.36],
+        StripOnInput->False], 20]}}],
+   Annotation[#, 
+    VertexCoordinateRules -> {{1.0000099999999996`, -1.0000099999999996`}, {
+     1.0000099999999996`, -2.0000099999999996`}, {
+     3.0000099999999996`, -3.0000099999999996`}, {4.00001, -4.00001}, {
+     4.00001, -5.00001}, {4.00001, -6.00001}, {4.00001, -7.00001}, {
+     8.000029999999999, -1.0000099999999996`}, {
+     8.000029999999999, -2.0000099999999996`}, {
+     7.000029999999999, -3.0000099999999996`}, {
+     7.000029999999999, -4.00001}, {7.000029999999999, -5.00001}, {
+     7.000029999999999, -6.00001}, {
+     6.000029999999999, -2.0000099999999996`}, {
+     2.0000099999999996`, -2.0000099999999996`}, {
+     3.0000099999999996`, -2.0000099999999996`}, {
+     4.00001, -1.0000099999999996`}, {4.00001, -2.0000099999999996`}, {
+     4.00001, -3.0000099999999996`}, {
+     7.000029999999999, -2.0000099999999996`}}]& ],
+  AspectRatio->Automatic,
+  FrameTicks->None,
+  PlotRange->All,
+  PlotRangePadding->Scaled[0.1]]], "Output",
+ CellChangeTimes->{
+  3.395073675668*^9, {3.395073768251*^9, 3.395073787719*^9}, 
+   3.3950746329189997`*^9, {3.39507470549*^9, 3.395074719216*^9}, {
+   3.395075007999*^9, 3.3950750364820004`*^9}, 3.395172651774992*^9, 
+   3.395172693229992*^9, {3.395172798312992*^9, 3.395172895314992*^9}, 
+   3.3951734601979923`*^9, 3.395173863409992*^9, {3.395173975932992*^9, 
+   3.3951740103039923`*^9}, {3.3951741235409923`*^9, 
+   3.3951741451849923`*^9}, {3.3951742451979923`*^9, 
+   3.3951744342549925`*^9}, {3.3951744846579924`*^9, 3.395174491838992*^9}, {
+   3.395174542093992*^9, 3.3951747195999923`*^9}, {3.395706736152*^9, 
+   3.3957067846429996`*^9}, {3.395706855822*^9, 3.395706943007*^9}, 
+   3.396260166990698*^9, {3.396260204688698*^9, 3.3962602680846977`*^9}, {
+   3.3962603043276978`*^9, 3.3962603312256975`*^9}, 3.3962605970146976`*^9, 
+   3.4358079334264383`*^9, {3.435808010206764*^9, 3.435808019886672*^9}, {
+   3.435808061692758*^9, 3.435808087243952*^9}, {3.43580836926828*^9, 
+   3.435808420032917*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Entropy of the outcome: \"\>", "\[InvisibleSpace]", 
+   "0.9709505944546687`"}],
+  SequenceForm["Entropy of the outcome: ", 0.9709505944546687],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.4358080101523943`*^9, 3.435808019833275*^9}, {
+  3.435808061629393*^9, 3.435808087143067*^9}, {3.435808369209388*^9, 
+  3.435808420062818*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{640, 750},
+WindowMargins->{{52, Automatic}, {-18, Automatic}},
+FrontEndVersion->"6.0 for Mac OS X x86 (32-bit) (June 19, 2007)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 150, 2, 76, "Title"],
+Cell[743, 27, 2472, 41, 416, "Text"],
+Cell[CellGroupData[{
+Cell[3240, 72, 4639, 116, 463, "Input"],
+Cell[7882, 190, 940, 17, 66, "Print"],
+Cell[8825, 209, 15332, 292, 324, "Output"],
+Cell[24160, 503, 389, 8, 20, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
