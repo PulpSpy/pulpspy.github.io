@@ -26,14 +26,14 @@ function startPage(){
  
   <div class="links">
     <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="academic.php">Papers</a></li>
-      <li><a href="talks.php">Talks</a></li>
-      <li><a href="students.php">Students</a></li>
-      <li><a href="hiring.php">Hiring</a></li>
-      <li><a href="courses.php">Courses</a></li>
-      <li><a href="biblio.php">Bibliographies</a></li>
-      <li><a href="resources.php">Resources</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="academic.html">Papers</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="students.html">Students</a></li>
+      <li><a href="hiring.html">Hiring</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="bio.html">Bio</a></li>
+      <li><a href="resources.html">Resources</a></li>
     </ul>
   </div>
   
