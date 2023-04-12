@@ -6,6 +6,9 @@ startPage();
 <span id="bright">Talks</span></p>
 
 <ul>
+<li>Digital Economy Taxation Network / Revenu Québec, DET 2023, "Going Digital: Tax Systems and Emerging Technology," June 18, 2023.</li>
+<li>C-Dem/CSDC Forum, "Roundtable: Electoral Integrity," Panel, June 4, 2023.</li>
+<li>CIADI/GCS Aerospace Meets Cybersecurity Forum, "Cybersecurity challenges in aerospace," Moderator, April 17, 2023.</li>
 <li>Financial Management Institute of Canada (fmi*igf). "Blockchain and DeFi: Landscape," Nov 24, 2022.</li>
 <li>Forum International de la Cybersécurité (FIC), "Cybersecurity challenges for this new digital future?." Nov 1, 2022.</li>
 <li>MTL Connect, "MTL Inspire." Panel, October 19, 2022. </li>
