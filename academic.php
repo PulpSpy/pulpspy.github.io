@@ -1,7 +1,45 @@
-<?php
-require "common/include.php";
-startPage();
-?>
+
+<head>
+  <title>Jeremy Clark</title>
+  <style>
+  @import url(common/style.css);
+  </style>
+  <meta name="google-site-verification" content="UvbGp2fR_PsOu3cS1DcCyvOaTdsiqqivzU8YelUOLrY" />
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">
+    <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+     <tr>
+      <!--<td><img align="left" src="images/uni.jpg"></td>-->
+      <td><img align="left" src="images/logo2.gif"></td>
+     </tr>
+    </table>
+  </div>
+ 
+  <div class="links">
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="academic.php">Papers</a></li>
+      <li><a href="talks.php">Talks</a></li>
+      <li><a href="students.php">Students</a></li>
+      <li><a href="hiring.php">Hiring</a></li>
+      <li><a href="courses.php">Courses</a></li>
+      <li><a href="biblio.php">Bibliographies</a></li>
+      <li><a href="resources.php">Resources</a></li>
+    </ul>
+  </div>
+  
+  <div class="content">
+  
+<!--  
+<div style="border: 2px solid black; padding: 5px; margin: 0px 15px 10px 15px; background-color: #ffddf4;">
+🔥 Currenly hiring part-time researchers: <a href="hiring.php">click here</a>.</div>
+-->
+
 
 
 
@@ -47,24 +85,24 @@ startPage();
 <ul>
 
 <li><p>
-        <font size=+1>Short-lived zero-knowledge proofs and signatures</font><br/>
-        Arasu Arun, Joseph Bonneau, Jeremy Clark<br/>
-        <i>ASIACRYPT 2022</i>
-        <a href="https://eprint.iacr.org/2022/190.pdf"><img src=images/pdf.gif border=0></a>
-</p></li>
-
-<li><p>
         <font size=+1>Mapping the Privacy Landscape for Central Bank Digital Currencies</font><br/>
         Raphael Auer, Rainer Böhme, Jeremy Clark, Didem Demirag<br/>
         <i>Communications of the ACM</i> (via <i>ACM Queue</i>)
-        <a href="https://queue.acm.org/detail.cfm?id=3561796"><img src=images/pdf.gif border=0></a>
+        <a href="papers/2023_cacm.pdf"><img src=images/pdf.gif border=0></a>
+</p></li>
+
+<li><p>
+        <font size=+1>Short-lived zero-knowledge proofs and signatures</font><br/>
+        Arasu Arun, Joseph Bonneau, Jeremy Clark<br/>
+        <i>ASIACRYPT 2022</i>
+        <a href="papers/2022_asiacrypt.pdf"><img src=images/pdf.gif border=0></a>
 </p></li>
 
 <li><p>
         <font size=+1>Privacy-Preserving Link Prediction</font><br/>
         Didem Demirag, Mina Namazi, Erman Ayday, Jeremy Clark <br/>
         <i>DPM 2022 (@ ESORICS 2022)</i>
-        <a href="https://arxiv.org/pdf/2210.01297.pdf"><img src=images/pdf.gif border=0></a>
+        <a href="papers/2022_dpm.pdf"><img src=images/pdf.gif border=0></a>
 </p></li>
 
 <li><p>
@@ -632,6 +670,7 @@ Rump Session of <i>CRYPTO 2006</i>
 
 </ul>
 
-<?
-endPage();
-?>
+</div>
+</div>
+</body>
+</html>
