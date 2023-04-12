@@ -1,0 +1,21 @@
+Errors in the lecture notes
+Please email me with more: j.clark@concordia.ca
+
+===
+
+PDF Page 15 / 115: Replace equal with not equal as in: "Binding: if c=commit(m), it is infeasible to reveal message m'=Reveal(c) where m != m.
+
+===
+
+PDF Page 24 / 115: Going from t=2^(246) to 2^(247) should make the problem easier, as the target is larger. So to adjust from t=2^(246) at 1 minute to a problem that takes 2 minutes, you should make t=2^(245). 
+
+===
+
+PDF Page 77 / 115:  When I wrote down the proof of work equation, I wrote "greater than" instead of "less than"
+It should read: t > H (prevBlock || merkleRoot || nonce). That is the hash output should be less than the target. 
+
+===
+
+Lecture ??: I call the smallest unit of Bitcoin a "Dai." It should be a "Wei." The unit is named for Wei Dei, an early cryptographer. Since recording this lecture, a token with the name "Dai" came out, which is completely different than Bitcoin. 
+
+===
