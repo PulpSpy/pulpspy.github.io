@@ -9,4 +9,4 @@ php hiring.php > hiring.html
 php resources.php > resources.html
 php talks.php > talks.html
 
-git commit -a -m "Scripted update"
+git commit -a -m "php > html"
