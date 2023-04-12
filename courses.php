@@ -17,11 +17,13 @@ startPage();
 <li><a href="courses/2301-6615/index.html">INSE 6615: Bitcoin & Blockchain Technologies</a>, Concordia University, Winter 2023</li>
 </ul>
 
-<p>YouTube courses:</p>
+<p>Free online versions:</p>
 
 <ul>
-<li><a href="courses/Online-6615/index.html">INSE 6615: Bitcoin & Blockchain Technologies</a></li>
-<li><a href="https://www.youtube.com/playlist?list=PLnD_TI73e88foTxqwxDcfdLzf2prhyvS4">INSE 6150: Security Evaluation Methodologies</a></li>
+<li><a href="courses/blockchain/index.html">Blockchain Technologies</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLnD_TI73e88foTxqwxDcfdLzf2prhyvS4">Security Evaluation Methodologies</a></li>
+<li><a href="courses/crypto/index.html">Foundations of Cryptography</a></li>
+
 </ul>
 
 </div>
