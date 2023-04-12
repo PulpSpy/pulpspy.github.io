@@ -1,52 +1,8 @@
+<?php
+require "common/include.php";
+startPage();
+?>
 
-<head>
-  <title>Jeremy Clark</title>
-  <style>
-  @import url(common/style.css);
-  </style>
-  <meta name="google-site-verification" content="UvbGp2fR_PsOu3cS1DcCyvOaTdsiqqivzU8YelUOLrY" />
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="title">
-    <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-     <tr>
-      <!--<td><img align="left" src="images/uni.jpg"></td>-->
-      <td><img align="left" src="images/logo2.gif"></td>
-     </tr>
-    </table>
-  </div>
- 
-  <div class="links">
-    <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="academic.php">Papers</a></li>
-      <li><a href="talks.php">Talks</a></li>
-      <li><a href="students.php">Students</a></li>
-      <li><a href="hiring.php">Hiring</a></li>
-      <li><a href="courses.php">Courses</a></li>
-      <li><a href="biblio.php">Bibliographies</a></li>
-      <li><a href="resources.php">Resources</a></li>
-    </ul>
-  </div>
-  
-  <div class="content">
-  
-<!--  
-<div style="border: 2px solid black; padding: 5px; margin: 0px 15px 10px 15px; background-color: #ffddf4;">
-🔥 Currenly hiring part-time researchers: <a href="hiring.php">click here</a>.</div>
--->
-
-
-
-
-
-
-
-<!-- % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % -->
 
 <span id="bright">Papers</span></p>
 
@@ -662,15 +618,8 @@ Submission to <i>VoComp 2007</i>
 	<a href=papers/2007_ccece.pdf><img src=images/pdf.gif border=0></a>
 </p></li>
 
-<!--<li><p><font size=+1>Punchscan and VoComp</font><br/>
-Rick Carback, David Chaum, <font color=#003366>Jeremy Clark</font>, Aleks Essex, Kevin Fisher, Ben Hosp, Stefan Popoveniuc, Jeremy Robin<br/>
-Rump Session of <i>CRYPTO 2006</i>
-<a href=papers/2006_crypto.ppt><img src=images/ppt.gif border=0></a> </p></li>-->
 
+<?
+endPage();
+?>
 
-</ul>
-
-</div>
-</div>
-</body>
-</html>
