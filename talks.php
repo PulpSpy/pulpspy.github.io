@@ -6,6 +6,7 @@ startPage();
 <span id="bright">Talks</span></p>
 
 <ul>
+<li>a16z crypto, "Fast Withdrawals from Optimistic Rollups," June 27, 2023.</li><a href="talks/2023_bridges.pdf"><img src="images/ppt.gif" border="0"></a>
 <li>Digital Economy Taxation Network / Revenu Québec, DET 2023, "Going Digital: Tax Systems and Emerging Technology," June 18, 2023.</li>
 <li>C-Dem/CSDC Forum, "Roundtable: Electoral Integrity," Panel, June 4, 2023.</li>
 <li>CIADI/GCS Aerospace Meets Cybersecurity Forum, "Cybersecurity challenges in aerospace," Moderator, April 17, 2023.</li>
